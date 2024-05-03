@@ -1,4 +1,4 @@
-USE [Academy];
+USE [Academy]
 
 -- Вибірка даних з таблиці "Groups"
 SELECT * FROM Groups;
