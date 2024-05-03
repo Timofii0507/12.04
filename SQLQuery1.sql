@@ -1,0 +1,42 @@
+CREATE DATABASE [Hospital]
+GO
+USE [Hospital]
+GO
+
+CREATE TABLE Departments (
+    Id INT PRIMARY KEY IDENTITY,
+    Building INT NOT NULL CHECK (Building BETWEEN 1 AND 5),
+    Financing MONEY NOT NULL CHECK (Financing >= 0) DEFAULT 0,
+    Floor INT NOT NULL CHECK (Floor >= 1),
+    Name NVARCHAR(100) NOT NULL UNIQUE
+);
+
+CREATE TABLE Diseases (
+    Id INT PRIMARY KEY IDENTITY,
+    Name NVARCHAR(100) NOT NULL UNIQUE,
+    Severity INT NOT NULL CHECK (Severity >= 1) DEFAULT 1
+);
+
+CREATE TABLE Doctors (
+    Id INT PRIMARY KEY IDENTITY,
+    Name NVARCHAR(MAX) NOT NULL,
+    Phone CHAR(10) NOT NULL,
+    Premium MONEY NOT NULL CHECK (Premium >= 0) DEFAULT 0,
+    Salary MONEY NOT NULL CHECK (Salary > 0),
+    Surname NVARCHAR(MAX) NOT NULL
+);
+
+CREATE TABLE Examinations (
+    Id INT PRIMARY KEY IDENTITY,
+    DayOfWeek INT NOT NULL CHECK (DayOfWeek BETWEEN 1 AND 7),
+    EndTime TIME NOT NULL,
+    Name NVARCHAR(100) NOT NULL UNIQUE,
+    StartTime TIME NOT NULL CHECK (StartTime BETWEEN '08:00:00' AND '18:00:00')
+);
+
+CREATE TABLE Wards (
+    Id INT PRIMARY KEY IDENTITY,
+    Building INT NOT NULL CHECK (Building BETWEEN 1 AND 5),
+    Floor INT NOT NULL CHECK (Floor >= 1),
+    Name NVARCHAR(20) NOT NULL UNIQUE
+);
